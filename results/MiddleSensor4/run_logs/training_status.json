@@ -1,0 +1,38 @@
+{
+    "DriveBehavior": {
+        "checkpoints": [
+            {
+                "steps": 88940,
+                "file_path": "results\\MiddleSensor4\\DriveBehavior\\DriveBehavior-88940.onnx",
+                "reward": 1456.6362584124329,
+                "creation_time": 1669030614.6903026,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor4\\DriveBehavior\\DriveBehavior-88940.pt"
+                ]
+            },
+            {
+                "steps": 439461,
+                "file_path": "results\\MiddleSensor4\\DriveBehavior\\DriveBehavior-439461.onnx",
+                "reward": 18444.95022497755,
+                "creation_time": 1669085850.7379355,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor4\\DriveBehavior\\DriveBehavior-439461.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 439461,
+            "file_path": "results\\MiddleSensor4\\DriveBehavior.onnx",
+            "reward": 18444.95022497755,
+            "creation_time": 1669085850.7379355,
+            "auxillary_file_paths": [
+                "results\\MiddleSensor4\\DriveBehavior\\DriveBehavior-439461.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

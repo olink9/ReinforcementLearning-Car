@@ -1,0 +1,56 @@
+{
+    "DriveBehavior": {
+        "checkpoints": [
+            {
+                "steps": 45632,
+                "file_path": "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-45632.onnx",
+                "reward": 791.8620111910861,
+                "creation_time": 1668625057.1235363,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-45632.pt"
+                ]
+            },
+            {
+                "steps": 93216,
+                "file_path": "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-93216.onnx",
+                "reward": 1295.373690341438,
+                "creation_time": 1668684040.7042913,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-93216.pt"
+                ]
+            },
+            {
+                "steps": 105217,
+                "file_path": "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-105217.onnx",
+                "reward": null,
+                "creation_time": 1668687310.5344856,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-105217.pt"
+                ]
+            },
+            {
+                "steps": 117230,
+                "file_path": "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-117230.onnx",
+                "reward": null,
+                "creation_time": 1668688439.2333975,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-117230.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 117230,
+            "file_path": "results\\MiddleSensor1\\DriveBehavior.onnx",
+            "reward": null,
+            "creation_time": 1668688439.2333975,
+            "auxillary_file_paths": [
+                "results\\MiddleSensor1\\DriveBehavior\\DriveBehavior-117230.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

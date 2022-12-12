@@ -1,0 +1,29 @@
+{
+    "DriveBehavior": {
+        "checkpoints": [
+            {
+                "steps": 924,
+                "file_path": "results\\DriverBrain\\DriveBehavior\\DriveBehavior-924.onnx",
+                "reward": 500.77088501976755,
+                "creation_time": 1668602463.3667526,
+                "auxillary_file_paths": [
+                    "results\\DriverBrain\\DriveBehavior\\DriveBehavior-924.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 924,
+            "file_path": "results\\DriverBrain\\DriveBehavior.onnx",
+            "reward": 500.77088501976755,
+            "creation_time": 1668602463.3667526,
+            "auxillary_file_paths": [
+                "results\\DriverBrain\\DriveBehavior\\DriveBehavior-924.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

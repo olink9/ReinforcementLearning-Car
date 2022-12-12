@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1667992618",
+        "python_version": "3.8.10 (tags/v3.8.10:3d8993a, May  3 2021, 11:48:03) [MSC v.1928 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\olive\\AppData\\Local\\Packages\\PythonSoftwareFoundation.Python.3.8_qbz5n2kfra8p0\\LocalCache\\local-packages\\Python38\\Scripts\\mlagents-learn config/Drive.yaml --run-id=DriverBrain1#",
+        "mlagents_version": "0.28.0",
+        "mlagents_envs_version": "0.28.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "1.7.1+cu110",
+        "numpy_version": "1.23.3",
+        "end_time_seconds": "1667992681"
+    },
+    "total": 62.8840735,
+    "count": 1,
+    "self": 0.010790199999995309,
+    "children": {
+        "run_training.setup": {
+            "total": 0.3543320999999997,
+            "count": 1,
+            "self": 0.3543320999999997
+        },
+        "TrainerController.start_learning": {
+            "total": 62.518951200000004,
+            "count": 1,
+            "self": 0.0002159999999946649,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 62.518707500000005,
+                    "count": 1,
+                    "self": 62.518707500000005
+                },
+                "TrainerController._save_models": {
+                    "total": 2.7700000003960668e-05,
+                    "count": 1,
+                    "self": 2.7700000003960668e-05
+                }
+            }
+        }
+    }
+}

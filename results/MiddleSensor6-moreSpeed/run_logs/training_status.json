@@ -1,0 +1,47 @@
+{
+    "DriveBehavior": {
+        "checkpoints": [
+            {
+                "steps": 74829,
+                "file_path": "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-74829.onnx",
+                "reward": 5626.480800906094,
+                "creation_time": 1669215887.5331473,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-74829.pt"
+                ]
+            },
+            {
+                "steps": 157354,
+                "file_path": "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-157354.onnx",
+                "reward": 20055.990340705932,
+                "creation_time": 1669229779.792913,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-157354.pt"
+                ]
+            },
+            {
+                "steps": 158108,
+                "file_path": "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-158108.onnx",
+                "reward": 14802.939779917398,
+                "creation_time": 1670411046.5342867,
+                "auxillary_file_paths": [
+                    "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-158108.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 158108,
+            "file_path": "results\\MiddleSensor6-moreSpeed\\DriveBehavior.onnx",
+            "reward": 14802.939779917398,
+            "creation_time": 1670411046.5342867,
+            "auxillary_file_paths": [
+                "results\\MiddleSensor6-moreSpeed\\DriveBehavior\\DriveBehavior-158108.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}
