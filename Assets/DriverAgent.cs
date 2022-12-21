@@ -29,7 +29,10 @@ public class DriverAgent : Agent
     public Transform crlLvl2Start2;
     public bool doCRL = false;
 
-    private int endedEpisodes = 0;
+    private int totalSteps = 0;
+    private int stepsUntilCRL2 = 1000000; // = actually 10 000 ?!
+    private int stepsUntilCRL3 = 3000000;
+    //private int endedEpisodes = 0;
 
     float oldTime = float.MaxValue;
 
@@ -42,8 +45,6 @@ public class DriverAgent : Agent
         }
 
         sensors = vehicle.GetComponents<RayPerceptionSensorComponent3D>();
-
-        //Debug.Log(middleSensor.GetName());
 
         foreach (RayPerceptionSensorComponent3D rays in sensors)
         {
@@ -72,9 +73,9 @@ public class DriverAgent : Agent
         laptime = 0f;
         distance = 0f;
 
-        endedEpisodes++;
+        //endedEpisodes++;
 
-        if(endedEpisodes > 200000)
+        if(Academy.Instance.TotalStepCount > stepsUntilCRL3)
         {
             doCRL = false;
         }
@@ -101,7 +102,7 @@ public class DriverAgent : Agent
         else
         {
             int x = Random.Range(0, 2);
-            if (endedEpisodes < 100000)
+            if (Academy.Instance.TotalStepCount < stepsUntilCRL2)
             {
                 this.transform.localPosition = crlLvl1Start.position;
                 this.transform.rotation = crlLvl1Start.rotation;
@@ -121,12 +122,16 @@ public class DriverAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        acc = Mathf.Clamp(actions.ContinuousActions[0], 0f, 1f);
+        acc = Mathf.Clamp(actions.ContinuousActions[0], 0.3f, 1f);
         steer = Mathf.Clamp(actions.ContinuousActions[1], -1f, 1f);
 
         control.accel = acc;
         control.steer = steer;
-        
+
+        float accReward = acc * 100;
+        Debug.Log("Acceleration Reward: " + accReward);
+        AddReward(accReward);
+
 
         int numHit = 0;
         //Debug.Log(middleSensor.RaySensor.RayPerceptionOutput.RayOutputs);
@@ -160,9 +165,6 @@ public class DriverAgent : Agent
         {
             distance += 1f;
             lastPosition = currposition;
-            //AddReward(1f * control.speed); 
-            //AddReward(0.5f + (numHit / 13) /2);
-
 
             float speedReward = control.speed;
             Debug.Log("Speed Reward: " + speedReward);
