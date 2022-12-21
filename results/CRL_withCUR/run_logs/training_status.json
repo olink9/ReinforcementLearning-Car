@@ -1,0 +1,41 @@
+{
+    "RoadNumber": {
+        "lesson_num": 1
+    },
+    "DriveBehavior": {
+        "checkpoints": [
+            {
+                "steps": 2297,
+                "file_path": "results\\CRL_withCUR\\DriveBehavior\\DriveBehavior-2297.onnx",
+                "reward": 11382.27679869186,
+                "creation_time": 1671636059.980949,
+                "auxillary_file_paths": [
+                    "results\\CRL_withCUR\\DriveBehavior\\DriveBehavior-2297.pt"
+                ]
+            },
+            {
+                "steps": 2641,
+                "file_path": "results\\CRL_withCUR\\DriveBehavior\\DriveBehavior-2641.onnx",
+                "reward": 11054.213044819078,
+                "creation_time": 1671636159.0239534,
+                "auxillary_file_paths": [
+                    "results\\CRL_withCUR\\DriveBehavior\\DriveBehavior-2641.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2641,
+            "file_path": "results\\CRL_withCUR\\DriveBehavior.onnx",
+            "reward": 11054.213044819078,
+            "creation_time": 1671636159.0239534,
+            "auxillary_file_paths": [
+                "results\\CRL_withCUR\\DriveBehavior\\DriveBehavior-2641.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "0.28.0",
+        "torch_version": "1.7.1+cu110"
+    }
+}

@@ -16,25 +16,36 @@ public class DriverAgent : Agent
     public float steer;
     public float acc;
 
-    public GameObject FinishTrigger;
+    //public GameObject FinishTrigger;
 
     float laptime = 0;
     float distance = 0;
+
+    [Space]
     public RayPerceptionSensorComponent3D[] sensors;
     private RayPerceptionSensorComponent3D middleSensor;
     private const int numMiddleSensors = 3;
 
-    public Transform crlLvl1Start;
-    public Transform crlLvl2Start1;
-    public Transform crlLvl2Start2;
-    public bool doCRL = false;
+    [Header("CRL")]
+    public Transform straightStart;
+    public Transform curveStart1;
+    public Transform curveStart2;
 
-    private int totalSteps = 0;
-    private int stepsUntilCRL2 = 1000000; // = actually 10 000 ?!
-    private int stepsUntilCRL3 = 3000000;
-    //private int endedEpisodes = 0;
+    private int stepsUntilCurveTrack = 1000000; // = actually 10 000 ?!
+    private int stepsUntilClosedTrack = 3000000;
+
+    public bool chooseTrackFromInspector = false;
 
     float oldTime = float.MaxValue;
+
+    public enum Track
+    {
+        STRAIGHT,
+        CURVE,
+        CLOSED
+    }
+
+    public Track track = Track.STRAIGHT;
 
     void Start()
     {
@@ -65,22 +76,68 @@ public class DriverAgent : Agent
         laptime += Time.fixedDeltaTime;
     }
 
+    private void ChooseRoad() 
+    { 
+        int road = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("RoadNumber", 0) - 1;
+
+        if (road == 0)
+        {
+            track = Track.STRAIGHT;
+        }
+        else if (road == 1)
+        {
+            track = Track.CURVE;
+        }
+        else if (road == 2)
+        {
+            track = Track.CLOSED;
+        }
+    }
+
     public override void OnEpisodeBegin()
     {
-        
+        Debug.Log("Episode Ended");
+
+
         var rb = this.GetComponent<Rigidbody>();
         rb.velocity = Vector3.zero;
         laptime = 0f;
         distance = 0f;
 
-        //endedEpisodes++;
-
-        if(Academy.Instance.TotalStepCount > stepsUntilCRL3)
-        {
-            doCRL = false;
+        if(!(track == Track.CLOSED)) {
+            ChooseRoad();
         }
+        
 
-        if (!doCRL)
+        //if(!chooseTrackFromInspector && Academy.Instance.TotalStepCount > stepsUntilClosedTrack)
+        //{
+        //    track = Track.CLOSED;
+        //}
+        //else if (!chooseTrackFromInspector && Academy.Instance.TotalStepCount > stepsUntilCurveTrack)
+        //{
+        //    track = Track.CURVE;
+        //}
+        
+        if (track == Track.STRAIGHT)
+        {
+            this.transform.localPosition = straightStart.position;
+            this.transform.rotation = straightStart.rotation;
+        }
+        else if (track == Track.CURVE)
+        {
+            int x = Random.Range(0, 2);
+            if (x == 0)
+            {
+                this.transform.localPosition = curveStart1.position;
+                this.transform.rotation = curveStart1.rotation;
+            }
+            else if (x == 1)
+            {
+                this.transform.localPosition = curveStart2.position;
+                this.transform.rotation = curveStart2.rotation;
+            }
+        }
+        else if (track == Track.CLOSED)
         {
             int x = Random.Range(0, 3);
             if (x == 0)
@@ -99,25 +156,6 @@ public class DriverAgent : Agent
                 this.transform.rotation = Quaternion.Euler(new Vector3(0f, 46.5f, 0f));
             }
         }
-        else
-        {
-            int x = Random.Range(0, 2);
-            if (Academy.Instance.TotalStepCount < stepsUntilCRL2)
-            {
-                this.transform.localPosition = crlLvl1Start.position;
-                this.transform.rotation = crlLvl1Start.rotation;
-            }
-            else if (x == 0)
-            {
-                this.transform.localPosition = crlLvl2Start1.position;
-                this.transform.rotation = crlLvl2Start1.rotation;
-            }
-            else if (x == 1)
-            {
-                this.transform.localPosition = crlLvl2Start2.position;
-                this.transform.rotation = crlLvl2Start2.rotation;
-            }
-        }
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -129,9 +167,8 @@ public class DriverAgent : Agent
         control.steer = steer;
 
         float accReward = acc * 100;
-        Debug.Log("Acceleration Reward: " + accReward);
+        //Debug.Log("Acceleration Reward: " + accReward);
         AddReward(accReward);
-
 
         int numHit = 0;
         //Debug.Log(middleSensor.RaySensor.RayPerceptionOutput.RayOutputs);
@@ -148,15 +185,13 @@ public class DriverAgent : Agent
             }
             //Debug.Log("Hit " + numHit + " Rays");
         }
-        
-        
 
         if (forwardView.OnRoad == false)
         {
             float offRoadReward = (distance / laptime);
             AddReward(offRoadReward);
-            Debug.Log("Off Road Reward: " + offRoadReward);
-            Debug.Log("Episode End: Off Road");
+            //Debug.Log("Off Road Reward: " + offRoadReward);
+            //Debug.Log("Episode End: Off Road");
             EndEpisode();
         }
 
@@ -167,10 +202,10 @@ public class DriverAgent : Agent
             lastPosition = currposition;
 
             float speedReward = control.speed;
-            Debug.Log("Speed Reward: " + speedReward);
+            //Debug.Log("Speed Reward: " + speedReward);
 
             float rayReward = numHit * 2;// / 13 * 15;
-            Debug.Log("Ray Reward: " + rayReward);
+            //Debug.Log("Ray Reward: " + rayReward);
 
             AddReward(speedReward);
             AddReward(rayReward);
@@ -188,7 +223,6 @@ public class DriverAgent : Agent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == FinishTrigger)
         if (other.gameObject.CompareTag("FinishTrigger"))
         {
             AddReward(distance / laptime);
